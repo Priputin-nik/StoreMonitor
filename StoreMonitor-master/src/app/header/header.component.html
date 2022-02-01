@@ -1,0 +1,8 @@
+<section class="header">
+  <a class="link-rout" routerLink="product" routerLinkActive="active">
+    <div class="logo">StoreMonitor</div>
+  </a>
+<button class="icon-cart" mat-icon-button routerLink="basket" routerLinkActive="active">
+  <mat-icon class="icon-cart" [matBadge]="counterThings$ | async" matBadgeColor="warn">shopping_cart</mat-icon>
+</button>
+</section>

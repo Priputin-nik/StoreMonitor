@@ -1,0 +1,16 @@
+<section class="product-list">
+  <div class="wrapper" *ngFor="let item of dataThings$ | async">
+    <a class="thing" [routerLink]="['/products', item.id]" routerLinkActive="active">
+      <div class="img-wrapper">
+        <img src="{{ item.img }}">
+      </div>
+      <div class="price-name">
+        <p class="thing-name">{{ item.name }} </p>
+        <div class="price-button-block">
+          <p class="thing-price">{{ item.price | currency: 'RUB':'symbol-narrow' :'0.0-0' }}</p>
+        </div>
+    </div>
+    </a>
+    <button mat-button color="accent" (click)="additionInBasket(item.id)">В корзину</button>
+  </div>
+</section>

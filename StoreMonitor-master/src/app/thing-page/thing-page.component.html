@@ -1,0 +1,14 @@
+<section *ngIf="currentThing$ | async">
+  <!-- <div>{{currentThing$}}</div> -->
+  <img [src]="(currentThing$ | async)?.img">
+  <div class="description">
+    <h2 class="name">{{(currentThing$ | async)?.name}}</h2>
+    <div>Диагональ: {{(currentThing$ | async)?.diagonal}} </div>
+    <div>Разрешение экрана: {{(currentThing$ | async)?.resolution}} </div>
+    <div>Назначение: {{(currentThing$ | async)?.purpose}} </div>
+    <div>Цена: {{(currentThing$ | async)?.price}}</div>
+    <button mat-button color="accent">В корзину</button>
+  </div>
+</section>
+
+<!-- (click)="additionInBasket(item.id)" -->
