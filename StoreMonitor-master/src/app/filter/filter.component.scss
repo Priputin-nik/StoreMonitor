@@ -1,0 +1,21 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+
+  border: 2px solid black;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.title-filter {
+  font-weight: 700;
+}
+
+.title-filter:hover {
+  color: rgb(168, 168, 245);
+}

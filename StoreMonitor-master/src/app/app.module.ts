@@ -14,16 +14,18 @@ import { ThingPageComponent } from './thing-page/thing-page.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
 import { AuthorizationComponent } from './authorization/authorization.component';
-
+import { FilterComponent } from './filter/filter.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     WrapperComponent,
     BasketComponent,
     ProductListComponent,
     HeaderComponent,
     ThingPageComponent,
-      AuthorizationComponent
+      AuthorizationComponent,
+      FilterComponent
    ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { AuthorizationComponent } from './authorization/authorization.component'
     BrowserAnimationsModule,
     MatButtonModule,
     MatBadgeModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
