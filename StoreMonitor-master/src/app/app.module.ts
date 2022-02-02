@@ -13,15 +13,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { ThingPageComponent } from './thing-page/thing-page.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
+import { AuthorizationComponent } from './authorization/authorization.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     WrapperComponent,
     BasketComponent,
     ProductListComponent,
     HeaderComponent,
-    ThingPageComponent
+    ThingPageComponent,
+      AuthorizationComponent
    ],
   imports: [
     BrowserModule,

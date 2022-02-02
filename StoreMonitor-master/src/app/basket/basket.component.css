@@ -1,12 +1,14 @@
 :host {
   display: flex;
   justify-content: center;
+  margin-top: 80px;
 }
 
-section {
+.table-things {
   display: flex;
-  width: 1100px;
+  position: relative;
   flex-direction: column;
+  width: 1100px;
   justify-content: center;
   margin-top: 30px;
 }
@@ -19,4 +21,32 @@ li {
   max-width: 100px;
   max-height: 100px;
   margin-top: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.common-sum {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  right: 190px;
+  top: 225px;
+  min-height: 200px;
+  width: 200px;
+  margin-left: 30px;
+  background-color: #ffe0b6;
+}
+
+.title-common-sum {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.common-sum {
+  font-size: 15px;
 }

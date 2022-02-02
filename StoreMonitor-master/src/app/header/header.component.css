@@ -2,6 +2,8 @@
 
 :host {
   display: flex;
+  position: fixed;
+  z-index: 1;
   justify-content: center;
   width: 100vw;
   height: 100px;
@@ -22,10 +24,10 @@
   color: #f94081;
 }
 
-.link-rout:active,
-.link-rout:hover,
-.link-rout {
-  text-decoration: none;
-  color: #000;
+.link-rout  {
+  all: unset;
+}
 
+.authorization-button {
+  margin-left: 20px;
 }

@@ -22,19 +22,26 @@ export class ThingPageComponent implements OnInit {
     resolution: '1920x1080 Full HD',
     purpose: 'Для дома и офиса'
   }
+
+  public productIdFromRoute!: number;
   public currentThing$!: Observable<thingOnCatalog | undefined>;
   public allDataThingsTEST: thingOnCatalog[] = allDataThingsInitial;
   public allDataThings$: Observable<thingOnCatalog[]>;
 
   constructor(private route: ActivatedRoute, private dataThingsService: ProductListContentService) {
     this.allDataThings$ = dataThingsService.allDataThings$;
+
    }
 
   ngOnInit() {
-    const routeParams = this.route.snapshot.paramMap;
-    const productIdFromRoute = Number(routeParams.get('productId'));
-    this.test = this.allDataThingsTEST.find(product => product.id === productIdFromRoute);
-    this.currentThing$ = this.allDataThings$.pipe(map(items => items.find(product => product.id === productIdFromRoute)))
+    this.productIdFromRoute = Number(this.route.snapshot.paramMap.get('productId'));
+    this.test = this.allDataThingsTEST.find(product => product.id === this.productIdFromRoute);
+    this.currentThing$ = this.allDataThings$.pipe(map(items => items.find(product => product.id === this.productIdFromRoute)))
+  }
+
+  additionInBasket() {
+    console.log(this.productIdFromRoute);
+    this.dataThingsService.additionInBasket(this.productIdFromRoute);
   }
 
 }

@@ -7,8 +7,11 @@
     <div>Разрешение экрана: {{(currentThing$ | async)?.resolution}} </div>
     <div>Назначение: {{(currentThing$ | async)?.purpose}} </div>
     <div>Цена: {{(currentThing$ | async)?.price}}</div>
-    <button mat-button color="accent">В корзину</button>
+    <button mat-button color="accent" (click)="additionInBasket()">В корзину</button>
   </div>
 </section>
 
-<!-- (click)="additionInBasket(item.id)" -->
+
+
+
+<!-- (click)="additionInBasket((currentThing$ | async)?.id)" -->

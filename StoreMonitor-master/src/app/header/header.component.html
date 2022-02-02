@@ -2,7 +2,13 @@
   <a class="link-rout" routerLink="product" routerLinkActive="active">
     <div class="logo">StoreMonitor</div>
   </a>
-<button class="icon-cart" mat-icon-button routerLink="basket" routerLinkActive="active">
-  <mat-icon class="icon-cart" [matBadge]="counterThings$ | async" matBadgeColor="warn">shopping_cart</mat-icon>
-</button>
+  <div class="wrapper-button">
+    <button class="icon-cart" mat-icon-button routerLink="basket" routerLinkActive="active">
+      <mat-icon class="icon-cart" [matBadge]="counterThings$ | async" matBadgeColor="warn">shopping_cart</mat-icon>
+    </button>
+    <button class="authorization-button" mat-icon-button>
+      <mat-icon> exit_to_app </mat-icon>
+    </button>
+  </div>
 </section>
+

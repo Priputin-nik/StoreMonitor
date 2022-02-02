@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { allDataThingsInitial } from '../consts/dataAllThingsInitial';
 import { diagonal, img, name, purpose, resolution } from '../consts/filling';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
@@ -85,9 +85,30 @@ getProducts():Observable<thingOnCatalog[]> {
       return item
     });
     this._allDataThings$.next(addInCardArray);
+  }
 
+  decrementThingCount(evt: number) {
+    this.numberThingsInBasket--;
+    let addInCardArray = this._allDataThings$.getValue().map(item => {
+      if (item.id === evt) {
+        item.addBasket = true;
+        item.countInBasket--
+        if (item.countInBasket === 0) {
+          item.addBasket = false;
+        }
+      }
+      return item
+    });
+    this._allDataThings$.next(addInCardArray);
+  }
+
+  clearBasket() {
+    let allAdditionItems = this._allDataThings$.getValue().map(item => {
+      item.addBasket = false;
+      item.countInBasket = 0;
+      return item
+    });
+    this._allDataThings$.next(allAdditionItems);
   }
 
 }
-
-// + ' ' + this.getWord()
