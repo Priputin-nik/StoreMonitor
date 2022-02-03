@@ -7,5 +7,6 @@ export interface thingOnCatalog  {
   id: number;
   diagonal: string;
   resolution: string;
-  purpose: string
+  purpose: string;
+  visible: boolean;
 }

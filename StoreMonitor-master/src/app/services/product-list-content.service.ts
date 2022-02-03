@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { allDataThingsInitial } from '../consts/dataAllThingsInitial';
-import { diagonal, img, name, purpose, resolution } from '../consts/filling';
+import { diagonal, img, name, resolution, purpose} from '../consts/filling';
+import { filterList } from '../interfaces/filter-list';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
+import { FilterService } from './filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +15,15 @@ export class ProductListContentService{
   public imgInitial: string[];
   public nameInitial: string[];
   public diagonalInit: string[];
-  public resolutionInit: string[];
-  public purposeInit: string[];
+  public resolutionInit: filterList[];
+  public purposeInit: filterList[];
   public numberThingsOnPage: number;
   public numberThingsInBasket: number;
   public alphabetForName: string;
+  public resolutionFilter$: Observable<filterList[]>;
+  public purposeFilter$: Observable<filterList[]>;
 
-constructor() {
+constructor(private filterService: FilterService) {
   this._allDataThings$ = new BehaviorSubject<thingOnCatalog[]>(allDataThingsInitial);
   this.imgInitial = img;
   this.nameInitial = name;
@@ -30,7 +34,11 @@ constructor() {
   this.allDataThings$ = this.getProducts();
   this.numberThingsInBasket = 0;
   this.alphabetForName = 'abcdefghijklmnopqrstuvwxyz';
+  this.resolutionFilter$ = filterService.resolutionForRender$;
+  this.purposeFilter$ = filterService.purposeForRender$;
 }
+
+
 
 getWord(){
   return this.alphabetForName[this.getNumber(0, 26)]
@@ -51,6 +59,10 @@ getElement(arrayInitial:string[]):string {
   return arrayInitial[this.getNumber(0, arrayInitial.length - 1)]
   }
 
+getElementForObject(arrayInitial:filterList[]):string {
+  return arrayInitial[this.getNumber(0, arrayInitial.length - 1)].name
+  }
+
 createElement(): thingOnCatalog {
   return {
     img: this.getElement(this.imgInitial),
@@ -60,8 +72,9 @@ createElement(): thingOnCatalog {
     countInBasket: 0,
     id: 0,
     diagonal: this.getElement(this.diagonalInit),
-    resolution: this.getElement(this.resolutionInit),
-    purpose: this.getElement(this.purposeInit),
+    resolution: this.getElementForObject(this.resolutionInit),
+    purpose: this.getElementForObject(this.purposeInit),
+    visible: true
   }
     }
 

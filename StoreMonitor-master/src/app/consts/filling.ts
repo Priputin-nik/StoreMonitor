@@ -1,3 +1,5 @@
+import { filterList } from "../interfaces/filter-list";
+
 export const img: string[] = [
   '/assets/img1.jpeg',
   '/assets/img2.jpeg',
@@ -30,17 +32,17 @@ export const diagonal: string[] = [
 '30'
 ]
 
-export const resolution: string[] = [
-  '1920x1080 Full HD',
-  '2560x1440 2К',
-  '3840x2160 4K UHD',
-  '3440x1440',
-  '1920x1200'
+export const resolution: filterList[] = [
+  {name: '1920x1080 Full HD', checked: true},
+  {name: '2560x1440 2К', checked: true},
+  {name: '3840x2160 4K UHD', checked: true},
+  {name: '3440x1440', checked: true},
+  {name: '1920x1200', checked: true},
 ]
 
-export const purpose: string[] = [
-  'Для дома и офиса',
-  'Для игр',
-  'Для дизайна',
-  'Для работы с графикой'
+export const purpose: filterList[] = [
+  { name: 'Для дома и офиса', checked: true},
+  { name: 'Для игр', checked: true},
+  { name: 'Для дизайна', checked: true},
+  { name: 'Для работы с графикой', checked: true},
 ]

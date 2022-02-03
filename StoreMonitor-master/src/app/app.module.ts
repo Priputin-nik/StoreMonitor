@@ -16,8 +16,10 @@ import { MatTableModule } from '@angular/material/table';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { FilterComponent } from './filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatSliderModule} from '@angular/material/slider';
+
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     WrapperComponent,
     BasketComponent,
@@ -35,7 +37,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatBadgeModule,
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

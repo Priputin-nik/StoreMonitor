@@ -1,9 +1,9 @@
 .filter {
   display: flex;
   flex-direction: column;
-  width: 210px;
+  width: 250px;
 
-  border: 2px solid black;
+  // border: 2px solid black;
   margin-left: 10px;
   margin-top: 10px;
 }
@@ -19,3 +19,13 @@ li {
 .title-filter:hover {
   color: rgb(168, 168, 245);
 }
+
+.block-price {
+  display: flex;
+}
+
+.min-max-value {
+  font-size: 10px;
+  align-self: center;
+}
+
