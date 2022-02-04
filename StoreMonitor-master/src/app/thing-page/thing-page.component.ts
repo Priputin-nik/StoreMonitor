@@ -11,17 +11,6 @@ import { ProductListContentService } from '../services/product-list-content.serv
   styleUrls: ['./thing-page.component.scss']
 })
 export class ThingPageComponent implements OnInit {
-  // public test: thingOnCatalog | undefined = {
-  //   img: 'assets/img1.jpeg',
-  //   name: '31,5" UHD-монитор U32J590UQI',
-  //   price: 35000,
-  //   addBasket: true,
-  //   countInBasket: 0,
-  //   id: 0,
-  //   diagonal: '23.8',
-  //   resolution: '1920x1080 Full HD',
-  //   purpose: 'Для дома и офиса'
-  // }
 
   public productIdFromRoute!: number;
   public currentThing$!: Observable<thingOnCatalog | undefined>;
@@ -35,7 +24,7 @@ export class ThingPageComponent implements OnInit {
 
   ngOnInit() {
     this.productIdFromRoute = Number(this.route.snapshot.paramMap.get('productId'));
-    // this.test = this.allDataThingsTEST.find(product => product.id === this.productIdFromRoute);
+  
     this.currentThing$ = this.allDataThings$.pipe(map(items => items.find(product => product.id === this.productIdFromRoute)))
   }
 

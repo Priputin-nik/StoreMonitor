@@ -11,16 +11,16 @@ export const img: string[] = [
 ];
 
 export const name: string[] = [
-  '27" монитор F27T700QQI',
-  '28" UHD-монитор U28R550UQI',
-  '31,5" UHD-монитор U32J590UQI',
-  '32" Игровой монитор Odyssey G5 [S32AG550EI]',
-  '23,5" Игровой монитор CRG5 [C24RG50FZI]',
-  '49” Игровой монитор Odyssey Neo G9',
-  '23,5" CURVED-монитор C24F390FHI',
-  '27" GAMING-монитор Odyssey G5 C27G55TQW (R1000, 144Hz)',
-  '32" UHD SMART-монитор S32AM700UI (ОС Tizen)',
-  '32" SMART-монитор S32AM500NI (ОС Tizen)',
+  'монитор F27T700QQI',
+  'UHD-монитор U28R550UQI',
+  'UHD-монитор U32J590UQI',
+  'Игровой монитор Odyssey G5 [S32AG550EI]',
+  'Игровой монитор CRG5 [C24RG50FZI]',
+  'Игровой монитор Odyssey Neo G9',
+  'CURVED-монитор C24F390FHI',
+  'GAMING-монитор Odyssey G5 C27G55TQW (R1000, 144Hz)',
+  'UHD SMART-монитор S32AM700UI (ОС Tizen)',
+  'SMART-монитор S32AM500NI (ОС Tizen)',
 ];
 
 export const diagonal: string[] = [

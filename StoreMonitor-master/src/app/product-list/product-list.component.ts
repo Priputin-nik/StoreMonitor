@@ -15,9 +15,10 @@ export class ProductListComponent implements OnInit {
 
   constructor(private dataThingsService: ProductListContentService) {
 
-    this.dataThings$ = dataThingsService.allDataThings$;
+    this.dataThings$ = dataThingsService.allDataThings$.pipe(map(items => items.filter(item => item.visible)))
 
     this.counterThings = 0;
+
   }
 
   ngOnInit() {

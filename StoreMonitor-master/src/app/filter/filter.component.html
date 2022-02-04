@@ -2,7 +2,7 @@
   <p class="title-filter">Разрешение экрана:</p>
   <ul class="filter-resolution">
     <li *ngFor="let resolution of resolutionForRender$ | async">
-      <mat-checkbox [checked]="resolution.checked" (click)="toggleResolutionFilter(resolution.name)">
+      <mat-checkbox [checked]="resolution.checked" (change)="toggleResolutionFilter(resolution.name)">
         {{resolution.name}}
       </mat-checkbox>
     </li>
@@ -15,7 +15,7 @@
   <p class="title-filter">Назначение:</p>
   <ul>
     <li *ngFor="let purpose of purposeForRender$ | async">
-      <mat-checkbox [checked]="purpose.checked" (click)="togglePurposeFilter(purpose.name)">
+      <mat-checkbox [checked]="purpose.checked" (change)="togglePurposeFilter(purpose.name)">
         {{ purpose.name }}
       </mat-checkbox>
     </li>

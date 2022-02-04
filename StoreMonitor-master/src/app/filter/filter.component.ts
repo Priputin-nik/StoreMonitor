@@ -30,13 +30,12 @@ export class FilterComponent implements OnInit {
 
   togglePurposeFilter(evt: string) {
     this.filterService.togglePurposeFilter(evt);
-    console.log(this.purposeForRender$)
+    this.dataThingsService.updateArrayAfterFilter();
   }
 
   toggleResolutionFilter(evt: string) {
-    this.filterService.toggleResolutionFilter(evt)
-    console.log(this.resolutionForRender$)
-
+    this.filterService.toggleResolutionFilter(evt);
+    this.dataThingsService.updateArrayAfterFilter();
   }
 
   ngOnInit() {

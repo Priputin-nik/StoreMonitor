@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, take, zip } from 'rxjs';
 import { allDataThingsInitial } from '../consts/dataAllThingsInitial';
 import { diagonal, img, name, resolution, purpose} from '../consts/filling';
 import { filterList } from '../interfaces/filter-list';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
 import { FilterService } from './filter.service';
-
+import { combineLatest } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +22,7 @@ export class ProductListContentService{
   public alphabetForName: string;
   public resolutionFilter$: Observable<filterList[]>;
   public purposeFilter$: Observable<filterList[]>;
+  // public arrayAfterFilter$: Observable<thingOnCatalog[]>;
 
 constructor(private filterService: FilterService) {
   this._allDataThings$ = new BehaviorSubject<thingOnCatalog[]>(allDataThingsInitial);
@@ -36,9 +37,31 @@ constructor(private filterService: FilterService) {
   this.alphabetForName = 'abcdefghijklmnopqrstuvwxyz';
   this.resolutionFilter$ = filterService.resolutionForRender$;
   this.purposeFilter$ = filterService.purposeForRender$;
+
+  // const arrayAfterFilter$ = 
 }
 
-
+updateArrayAfterFilter() {
+  combineLatest([ this.resolutionFilter$, this.purposeFilter$])
+  .pipe(map(([resolution, purpose]) => {
+    let arrayRender = this._allDataThings$.getValue();
+    for(let i = 0; i < arrayRender.length; i++) {
+      let currentResolution = arrayRender[i].resolution;
+      let currentPurpose = arrayRender[i].purpose;
+      let checkedResolution = resolution.find(item => item.name === currentResolution)?.checked;
+      let checkedPurpose = purpose.find(item => item.name === currentPurpose)?.checked;
+      if (checkedResolution && checkedPurpose) {
+        arrayRender[i].visible = true;
+      }
+      else {
+        arrayRender[i].visible = false;
+      }
+    }
+    this._allDataThings$.next(arrayRender)
+    console.log(arrayRender);
+    return arrayRender
+  }), take(1)).subscribe();
+}
 
 getWord(){
   return this.alphabetForName[this.getNumber(0, 26)]
@@ -123,5 +146,6 @@ getProducts():Observable<thingOnCatalog[]> {
     });
     this._allDataThings$.next(allAdditionItems);
   }
+
 
 }
