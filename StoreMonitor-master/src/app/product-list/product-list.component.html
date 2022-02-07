@@ -1,3 +1,4 @@
+
 <section class="product-list">
   <div class="wrapper" *ngFor="let item of dataThings$ | async">
     <a class="thing" [routerLink]="['/products', item.id]" routerLinkActive="active">

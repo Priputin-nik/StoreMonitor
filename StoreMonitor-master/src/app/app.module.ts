@@ -17,6 +17,7 @@ import { AuthorizationComponent } from './authorization/authorization.component'
 import { FilterComponent } from './filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
+import { NewSliderComponent } from './new-slider/new-slider.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatSliderModule} from '@angular/material/slider';
     HeaderComponent,
     ThingPageComponent,
       AuthorizationComponent,
-      FilterComponent
+      FilterComponent,
+      NewSliderComponent
    ],
   imports: [
     BrowserModule,

@@ -1,0 +1,34 @@
+<div class="middle">
+	<div class="multi-range-slider">
+
+		<input #inputLeft type="range"
+     id="input-left"
+     [min]="minLeft"
+     [max]="maxLeft"
+     [value]="leftValue"
+     (input)="setLeftValue()"
+     (mouseover)="leftMouseOver()"
+     (mouseout)="leftMouseOut()"
+     (mousedown)="leftMouseDown()"
+     (mouseup)="leftMouseUp()"
+     >
+
+		<input #inputRight
+    type="range"
+    id="input-right"
+    [min]="minRight"
+    [max]="maxRight"
+    [value]="rightValue"
+    (input)="setRightValue()">
+
+		<div class="slider">
+			<div class="track"></div>
+			<div #range class="range"></div>
+			<div #thumbLeft class="thumb left"></div>
+			<div #thumbRight class="thumb right"></div>
+		</div>
+	</div>
+</div>
+
+
+<!-- <input #inputLeft type="range" -->
