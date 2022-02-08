@@ -31,7 +31,7 @@ constructor(private filterService: FilterService) {
   this.diagonalInit = diagonal;
   this.resolutionInit = resolution;
   this.purposeInit = purpose;
-  this.numberThingsOnPage = 43;
+  this.numberThingsOnPage = 12;
   this.allDataThings$ = this.getProducts();
   this.numberThingsInBasket = 0;
   this.alphabetForName = 'abcdefghijklmnopqrstuvwxyz';

@@ -14,7 +14,7 @@ export class ProductListComponent implements OnInit {
   public counterThings: number;
 
   constructor(private dataThingsService: ProductListContentService) {
-
+    dataThingsService.getProducts();
     this.dataThings$ = dataThingsService.allDataThings$.pipe(map(items => items.filter(item => item.visible)))
 
     this.counterThings = 0;

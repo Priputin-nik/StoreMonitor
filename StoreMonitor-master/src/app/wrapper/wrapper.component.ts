@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wrapper.component.css']
 })
 export class WrapperComponent implements OnInit {
-
+  public external!: string;
   constructor() { }
 
   ngOnInit() {

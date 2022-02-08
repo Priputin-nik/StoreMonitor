@@ -1,2 +1,6 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
+
+<app-value-acsessor [(ngModel)]="external" name="externalVal" #validations="ngModel"></app-value-acsessor>
+external: {{external}}
+<p>{{validations.control | json}}</p>

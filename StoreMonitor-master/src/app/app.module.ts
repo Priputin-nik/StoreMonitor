@@ -18,9 +18,11 @@ import { FilterComponent } from './filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import { NewSliderComponent } from './new-slider/new-slider.component';
+import { ValueAcsessorComponent } from './value-acsessor/value-acsessor.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     WrapperComponent,
     BasketComponent,
@@ -29,7 +31,8 @@ import { NewSliderComponent } from './new-slider/new-slider.component';
     ThingPageComponent,
       AuthorizationComponent,
       FilterComponent,
-      NewSliderComponent
+      NewSliderComponent,
+      ValueAcsessorComponent
    ],
   imports: [
     BrowserModule,
@@ -40,7 +43,9 @@ import { NewSliderComponent } from './new-slider/new-slider.component';
     MatBadgeModule,
     MatTableModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
