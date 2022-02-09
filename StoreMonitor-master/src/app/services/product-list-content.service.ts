@@ -6,6 +6,7 @@ import { filterList } from '../interfaces/filter-list';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
 import { FilterService } from './filter.service';
 import { combineLatest } from 'rxjs';
+import { Filters } from '../filter/filrter';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +25,10 @@ export class ProductListContentService{
   public purposeFilter$: Observable<filterList[]>;
   // public arrayAfterFilter$: Observable<thingOnCatalog[]>;
 
-constructor(private filterService: FilterService) {
+constructor(
+  private filterService: FilterService,
+  private filters: Filters
+  ) {
   this._allDataThings$ = new BehaviorSubject<thingOnCatalog[]>(allDataThingsInitial);
   this.imgInitial = img;
   this.nameInitial = name;
@@ -37,13 +41,18 @@ constructor(private filterService: FilterService) {
   this.alphabetForName = 'abcdefghijklmnopqrstuvwxyz';
   this.resolutionFilter$ = filterService.resolutionForRender$;
   this.purposeFilter$ = filterService.purposeForRender$;
+  // this.subscribeFilters();
+  this.filters.form.valueChanges.pipe(
+    // функционал updateArrayAfterFilter
+  ).subscribe((val) => console.log(val)) // вынести в отдельный метод
 
-  // const arrayAfterFilter$ = 
+  // const arrayAfterFilter$ =
 }
 
 updateArrayAfterFilter() {
-  combineLatest([ this.resolutionFilter$, this.purposeFilter$])
-  .pipe(map(([resolution, purpose]) => {
+  this.filters.form.valueChanges
+  .pipe(map((filters) => {
+    console.log(filters)
     let arrayRender = this._allDataThings$.getValue();
     for(let i = 0; i < arrayRender.length; i++) {
       let currentResolution = arrayRender[i].resolution;
@@ -57,10 +66,8 @@ updateArrayAfterFilter() {
         arrayRender[i].visible = false;
       }
     }
-    this._allDataThings$.next(arrayRender)
-    console.log(arrayRender);
     return arrayRender
-  }), take(1)).subscribe();
+  }), ).subscribe((v) => this._allDataThings$.next(v));
 }
 
 getWord(){

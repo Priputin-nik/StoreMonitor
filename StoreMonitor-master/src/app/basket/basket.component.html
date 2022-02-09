@@ -4,7 +4,7 @@
   <div *ngIf="!(dataSource$ | async)?.length">Нет добавленных товаров!</div>
 
 
-  <app-new-slider></app-new-slider>
+  <!-- <app-new-slider></app-new-slider> -->
 
   <table *ngIf="(dataSource$ | async)?.length" mat-table [dataSource]="$any(dataSource$ | async)" class="mat-elevation-z8">
 

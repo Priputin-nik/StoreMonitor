@@ -1,5 +1,13 @@
-<section class="filter">
+<section class="filter" [formGroup]="form">
   <p class="title-filter">Разрешение экрана:</p>
+  <mat-form-field color="pink">
+    <mat-select formControlName="resolution" multiple>
+      <mat-option *ngFor="let resolution of resolutions" [value]="resolution">
+        {{ resolution }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <ul class="filter-resolution">
     <li *ngFor="let resolution of resolutionForRender$ | async">
       <mat-checkbox [checked]="resolution.checked" (change)="toggleResolutionFilter(resolution.name)">

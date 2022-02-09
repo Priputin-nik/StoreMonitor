@@ -18,8 +18,13 @@ import { FilterComponent } from './filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import { NewSliderComponent } from './new-slider/new-slider.component';
+<<<<<<< Updated upstream
 import { ValueAcsessorComponent } from './value-acsessor/value-acsessor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+=======
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [	
@@ -44,8 +49,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatCheckboxModule,
     MatSliderModule,
+<<<<<<< Updated upstream
     FormsModule,
     ReactiveFormsModule
+=======
+    ReactiveFormsModule,
+    MatSelectModule
+>>>>>>> Stashed changes
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { diagonal } from '../consts/filling';
 import { filterList } from '../interfaces/filter-list';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
 import { FilterService } from '../services/filter.service';
 import { ProductListContentService } from '../services/product-list-content.service';
+import { Filters, resolutions } from './filrter';
 
 @Component({
   selector: 'app-filter',
@@ -13,6 +15,8 @@ import { ProductListContentService } from '../services/product-list-content.serv
 })
 export class FilterComponent implements OnInit {
   public diagonalForRender = diagonal;
+  public form: FormGroup;
+  public resolutions = resolutions;
 
   public minPrice$: Observable<number>;
   public maxPrice$: Observable<number>;
@@ -20,7 +24,8 @@ export class FilterComponent implements OnInit {
   public resolutionForRender$: Observable<filterList[]>;
   public purposeForRender$: Observable<filterList[]>;
 
-  constructor(private dataThingsService :ProductListContentService, private filterService: FilterService) {
+  constructor(private dataThingsService :ProductListContentService, private filterService: FilterService, private filters: Filters) {
+    this.form = filters.form;
     this.allDataThings$ = dataThingsService.allDataThings$;
     this.minPrice$ = this.allDataThings$.pipe(map(items => items.sort((a,b) => a.price - b.price)[0].price));
     this.maxPrice$ = this.allDataThings$.pipe(map(items => items.sort((a,b) => b.price - a.price)[0].price));
