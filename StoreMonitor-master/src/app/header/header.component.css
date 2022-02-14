@@ -1,16 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
 
 :host {
-  display: flex;
-  position: fixed;
-  z-index: 1;
-  justify-content: center;
   width: 100vw;
   height: 100px;
-  background-color: rgb(168, 168, 245);
-  font-family: 'Mochiy Pop P One', sans-serif;
-  font-size: 25px;
-  text-shadow: 1px 2px 1px white;
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
 }
 
 .header {
@@ -18,6 +13,22 @@
   align-items: center;
   width: 1100px;
   justify-content: space-between;
+  z-index: 1;
+  height: 100px;
+  background-color: rgb(168, 168, 245);
+  font-family: 'Mochiy Pop P One', sans-serif;
+  font-size: 25px;
+  text-shadow: 1px 2px 1px white;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  height: 100px;
+  background-color: rgb(168, 168, 245);
+  width: 100vw;
+  z-index: 2;
 }
 
 .icon-cart {
@@ -30,4 +41,12 @@
 
 .authorization-button {
   margin-left: 20px;
+}
+
+.recently {
+  color: black
+}
+
+.logo {
+  user-select: none;
 }

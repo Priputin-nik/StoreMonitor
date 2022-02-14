@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, take, zip } from 'rxjs';
+import { BehaviorSubject, map, Observable, take} from 'rxjs';
 import { allDataThingsInitial } from '../consts/dataAllThingsInitial';
-import { diagonal, img, name, resolution, purpose} from '../consts/filling';
+import * as Values from '../consts/filling';
 import { filterList } from '../interfaces/filter-list';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
 import { FilterService } from './filter.service';
-import { combineLatest } from 'rxjs';
+import { FilterGroupService } from './filter-group.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductListContentService{
   private _allDataThings$: BehaviorSubject<thingOnCatalog[]>
   public allDataThings$: Observable<thingOnCatalog[]>;
+
   public imgInitial: string[];
   public nameInitial: string[];
   public diagonalInit: string[];
@@ -23,33 +24,76 @@ export class ProductListContentService{
   public resolutionFilter$: Observable<filterList[]>;
   public purposeFilter$: Observable<filterList[]>;
   // public arrayAfterFilter$: Observable<thingOnCatalog[]>;
+  public sortPriceArray: thingOnCatalog[];
+  public minPrice: number;
+  public maxPrice: number;
 
-constructor(private filterService: FilterService) {
+constructor(private filterService: FilterService,
+  private filters: FilterGroupService) {
   this._allDataThings$ = new BehaviorSubject<thingOnCatalog[]>(allDataThingsInitial);
-  this.imgInitial = img;
-  this.nameInitial = name;
-  this.diagonalInit = diagonal;
-  this.resolutionInit = resolution;
-  this.purposeInit = purpose;
-  this.numberThingsOnPage = 12;
-  this.allDataThings$ = this.getProducts();
+  this.imgInitial = Values.img;
+  this.nameInitial = Values.name;
+  this.diagonalInit = Values.diagonal;
+  this.resolutionInit = Values.resolution;
+  this.purposeInit = Values.purpose;
+  this.numberThingsOnPage = 44;
+  this.getProducts();
   this.numberThingsInBasket = 0;
   this.alphabetForName = 'abcdefghijklmnopqrstuvwxyz';
   this.resolutionFilter$ = filterService.resolutionForRender$;
   this.purposeFilter$ = filterService.purposeForRender$;
+  this.allDataThings$ = this._allDataThings$.asObservable().pipe(map(items => items.sort((a,b) => b.id - a.id)));
+  this.subscribeFilters();
 
-  // const arrayAfterFilter$ = 
+  this.sortPriceArray = this._allDataThings$.getValue().sort((a, b) => a.price - b.price);
+  this.minPrice = this.sortPriceArray[0].price;
+  this.maxPrice = this.sortPriceArray[this.sortPriceArray.length - 1].price;
+  this.initialMinMaxPrice();
 }
 
-updateArrayAfterFilter() {
-  combineLatest([ this.resolutionFilter$, this.purposeFilter$])
-  .pipe(map(([resolution, purpose]) => {
+initialMinMaxPrice() {
+  this.filters.form.patchValue({
+    minValue: this.minPrice,
+    maxValue: this.maxPrice
+  })
+}
+
+// Range price
+inputRange1(val: number) {
+  this.filters.form.patchValue({
+    minValue: val
+  })
+}
+
+
+inputRange2(val: number) {
+  this.filters.form.patchValue({
+    maxValue: val
+  })
+}
+
+selectedResolution() {
+  this.filters.form.patchValue({
+    resolution: [Values.resolutions, 'selectedAll'],
+    })
+}
+
+
+subscribeFilters(): void {
+  this.filters.form.valueChanges
+  .pipe(map((filters) => {
+
     let arrayRender = this._allDataThings$.getValue();
+    let activeAllResolution = filters.resolution.includes('selectedAll');
+    if (filters.resolution.length - 1 < Values.resolutions.length && activeAllResolution) {
+      this.selectedResolution();
+    }
+
     for(let i = 0; i < arrayRender.length; i++) {
       let currentResolution = arrayRender[i].resolution;
       let currentPurpose = arrayRender[i].purpose;
-      let checkedResolution = resolution.find(item => item.name === currentResolution)?.checked;
-      let checkedPurpose = purpose.find(item => item.name === currentPurpose)?.checked;
+      let checkedResolution = filters.resolution.includes(currentResolution);
+      let checkedPurpose = filters.purpose.includes(currentPurpose);
       if (checkedResolution && checkedPurpose) {
         arrayRender[i].visible = true;
       }
@@ -57,10 +101,9 @@ updateArrayAfterFilter() {
         arrayRender[i].visible = false;
       }
     }
-    this._allDataThings$.next(arrayRender)
-    console.log(arrayRender);
+
     return arrayRender
-  }), take(1)).subscribe();
+  })).subscribe(value => this._allDataThings$.next(value))
 }
 
 getWord(){
@@ -97,30 +140,36 @@ createElement(): thingOnCatalog {
     diagonal: this.getElement(this.diagonalInit),
     resolution: this.getElementForObject(this.resolutionInit),
     purpose: this.getElementForObject(this.purposeInit),
-    visible: true
+    visible: true,
+    recentlyViewed: false,
   }
     }
+    // :Observable<thingOnCatalog[]> 
+getProducts(){
 
-getProducts():Observable<thingOnCatalog[]> {
-  const arrayGenerate = Array.from({length: this.numberThingsOnPage}, () => this.createElement());
-  for (let i = 0; i < this.numberThingsOnPage; i++) {
-    arrayGenerate[i].id = i;
-  }
+  let arrayGenerate = Array.from({length: this.numberThingsOnPage}, () => this.createElement());
+  arrayGenerate.forEach((item, index) => item.id = index );
+
   this._allDataThings$.next(arrayGenerate);
-  this.allDataThings$ = this._allDataThings$.asObservable();
-  return this.allDataThings$
+
   }
+
 
   additionInBasket(evt: number) {
+
     this.numberThingsInBasket++;
     let addInCardArray = this._allDataThings$.getValue().map(item => {
       if (item.id === evt) {
         item.addBasket = true;
-        item.countInBasket++
+        item.countInBasket++;
+        item.recentlyViewed = true
       }
       return item
     });
+
     this._allDataThings$.next(addInCardArray);
+
+
   }
 
   decrementThingCount(evt: number) {
@@ -147,5 +196,15 @@ getProducts():Observable<thingOnCatalog[]> {
     this._allDataThings$.next(allAdditionItems);
   }
 
+  transitionOnCard(evt:number) {
 
+
+    let routCardArray = this._allDataThings$.getValue().map(item => {
+      if (item.id === evt) {
+        item.recentlyViewed = true;
+      }
+      return item
+    });
+    this._allDataThings$.next(routCardArray);
+  }
 }

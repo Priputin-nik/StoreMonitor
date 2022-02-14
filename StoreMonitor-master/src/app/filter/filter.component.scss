@@ -25,7 +25,17 @@ li {
 }
 
 .min-max-value {
-  font-size: 10px;
+  font-size: 12px;
   align-self: center;
+  width: 120px;
 }
 
+.input-price-wrabber {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-block {
+  display: flex;
+  flex-direction: column;
+}

@@ -18,11 +18,13 @@ import { FilterComponent } from './filter/filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import { NewSliderComponent } from './new-slider/new-slider.component';
-import { ValueAcsessorComponent } from './value-acsessor/value-acsessor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { RecentlyViewedComponent } from './recentlyviewed/recentlyviewed.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SliderComponent } from './slider/slider.component';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
-  declarations: [	
+  declarations: [				
     AppComponent,
     WrapperComponent,
     BasketComponent,
@@ -32,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       AuthorizationComponent,
       FilterComponent,
       NewSliderComponent,
-      ValueAcsessorComponent
+      RecentlyViewedComponent,
+      SliderComponent
    ],
   imports: [
     BrowserModule,
@@ -45,7 +48,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCheckboxModule,
     MatSliderModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

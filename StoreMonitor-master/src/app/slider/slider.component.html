@@ -1,0 +1,7 @@
+
+<!-- <input class="inp" type="range" min="0" max="11" value="{{valueLeft}}" (input)="rangeInput1()"> -->
+<!-- (input)="rangeInput(value)" -->
+<div class="slider-wrapper">
+<mat-slider #inputLeft class="input" step="1000" id="left-slider" [min]="min" [max]="max" (input)="inputRange1($event)"></mat-slider>
+<mat-slider #inputRight class="input" step="1000" id="rigth-slider" [min]="min" [max]="max" [value]="max" (input)="inputRange2($event)"></mat-slider>
+</div>

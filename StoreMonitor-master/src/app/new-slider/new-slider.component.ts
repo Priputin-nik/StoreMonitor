@@ -50,7 +50,7 @@ export class NewSliderComponent implements OnInit {
     }
 
     yourMethod(ev:any) {
-      console.log(ev)
+
     }
 
     setLeftValue() {
@@ -63,7 +63,7 @@ export class NewSliderComponent implements OnInit {
       // getComputedStyle(this.range.nativeElement).left = percent;
       this.renderer.setStyle(this.thumbLeft.nativeElement, 'left', percent);
       this.renderer.setStyle(this.range.nativeElement, 'left', percent);
-      console.log('aaa');
+
     }
 
     setRightValue() {
@@ -74,7 +74,7 @@ export class NewSliderComponent implements OnInit {
 
       this.renderer.setAttribute(this.thumbRight.nativeElement, 'right', percent);
       this.renderer.setAttribute(this.range.nativeElement, 'right', percent);
-      console.log('bbb');
+
     }
 
     leftMouseOver() {
