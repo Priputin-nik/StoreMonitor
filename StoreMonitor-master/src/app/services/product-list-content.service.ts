@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, take} from 'rxjs';
+import { BehaviorSubject, debounce, distinctUntilChanged, map, Observable, take, timer} from 'rxjs';
 import { allDataThingsInitial } from '../consts/dataAllThingsInitial';
 import * as Values from '../consts/filling';
 import { filterList } from '../interfaces/filter-list';
@@ -74,7 +74,7 @@ inputRange2(val: number) {
 
 selectedResolution() {
   this.filters.form.patchValue({
-    resolution: [Values.resolutions, 'selectedAll'],
+    resolution: [Values.resolutions],
     })
 }
 
@@ -82,13 +82,15 @@ selectedResolution() {
 subscribeFilters(): void {
   this.filters.form.valueChanges
   .pipe(map((filters) => {
-
     let arrayRender = this._allDataThings$.getValue();
+    console.log(filters)
     let activeAllResolution = filters.resolution.includes('selectedAll');
     if (filters.resolution.length - 1 < Values.resolutions.length && activeAllResolution) {
       this.selectedResolution();
     }
 
+    let minPrice = Math.min(filters.minValue, filters.maxValue);
+    let maxPrice = Math.max(filters.minValue, filters.maxValue);
     for(let i = 0; i < arrayRender.length; i++) {
       let currentResolution = arrayRender[i].resolution;
       let currentPurpose = arrayRender[i].purpose;
@@ -100,10 +102,17 @@ subscribeFilters(): void {
       else {
         arrayRender[i].visible = false;
       }
+      if (arrayRender[i].visible && arrayRender[i].price > minPrice 
+        && arrayRender[i].price < maxPrice) {
+        arrayRender[i].visible = true;
+      }
+      else {
+        arrayRender[i].visible = false;
+      }
     }
 
     return arrayRender
-  })).subscribe(value => this._allDataThings$.next(value))
+  }), debounce(() => timer(1000))).subscribe(value => this._allDataThings$.next(value))
 }
 
 getWord(){

@@ -29,7 +29,7 @@ li {
 
 .common-sum {
   display: flex;
-  position: fixed;
+  /* position: fixed; */
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

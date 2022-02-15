@@ -22,4 +22,5 @@ export class FilterGroupService {
       maxValue: 100
     });
   }
+  
 }

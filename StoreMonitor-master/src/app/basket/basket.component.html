@@ -3,10 +3,6 @@
   <h2>Добавленные товары:</h2>
   <div *ngIf="!(dataSource$ | async)?.length">Нет добавленных товаров!</div>
 
-
-  <!-- <app-new-slider></app-new-slider> -->
-<app-slider></app-slider>
-
   <table *ngIf="(dataSource$ | async)?.length" mat-table [dataSource]="$any(dataSource$ | async)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="img">
