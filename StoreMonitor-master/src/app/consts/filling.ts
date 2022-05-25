@@ -46,3 +46,18 @@ export const purpose: filterList[] = [
   { name: 'Для дизайна', checked: true},
   { name: 'Для работы с графикой', checked: true},
 ]
+
+export const resolutions = [
+  '1920x1080 Full HD',
+  '2560x1440 2К',
+  '3840x2160 4K UHD',
+  '3440x1440',
+  '1920x1200',
+]
+
+export const purposes = [
+  'Для дома и офиса',
+  'Для игр',
+  'Для дизайна',
+  'Для работы с графикой',
+]

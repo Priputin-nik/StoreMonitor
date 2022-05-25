@@ -29,7 +29,7 @@ export class ThingPageComponent implements OnInit {
   }
 
   additionInBasket() {
-    console.log(this.productIdFromRoute);
+
     this.dataThingsService.additionInBasket(this.productIdFromRoute);
   }
 

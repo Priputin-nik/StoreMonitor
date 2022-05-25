@@ -9,4 +9,5 @@ export interface thingOnCatalog  {
   resolution: string;
   purpose: string;
   visible: boolean;
+  recentlyViewed: boolean;
 }

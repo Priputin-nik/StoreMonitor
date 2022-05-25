@@ -1,8 +1,6 @@
-
 <section class="product-list">
-  <div class="wrapper" *ngFor="let item of dataThings$ | async">
-    <a class="thing" [routerLink]="['/products', item.id]" 
-    routerLinkActive="active" (click)="transitionOnCard(item.id)">
+  <div class="wrapper" *ngFor="let item of recentlyViewed$ | async">
+    <a class="thing" [routerLink]="['/products', item.id]" routerLinkActive="active">
       <div class="img-wrapper">
         <img src="{{ item.img }}">
       </div>
@@ -16,4 +14,3 @@
     <button mat-button color="accent" (click)="additionInBasket(item.id)">В корзину</button>
   </div>
 </section>
-<app-filter></app-filter>

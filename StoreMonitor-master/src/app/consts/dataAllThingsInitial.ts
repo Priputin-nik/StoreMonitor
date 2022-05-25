@@ -12,6 +12,7 @@ export const allDataThingsInitial: thingOnCatalog[] = [
     diagonal: '23.8',
     resolution: '1920x1080 Full HD',
     purpose: 'Для дома и офиса',
-    visible: true
+    visible: true,
+    recentlyViewed: false
   },
 ]

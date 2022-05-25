@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { map, Observable } from 'rxjs';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
 import { ProductListContentService } from '../services/product-list-content.service';
@@ -10,7 +11,7 @@ import { ProductListContentService } from '../services/product-list-content.serv
 })
 export class BasketComponent implements OnInit {
   public dataSource$: Observable<thingOnCatalog[]>;
-
+  
   public culumnsNames$: Observable<string[]>;
   public commonSum$: Observable<number>;
   public name: string[] = ['img', 'name', 'price', 'countInBasket', 'allPrice', 'controlCounts'];
@@ -24,6 +25,7 @@ export class BasketComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   incrementThingCount(id: number) {

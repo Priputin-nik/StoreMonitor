@@ -1,47 +1,49 @@
-<section class="filter">
+<section class="filter" [formGroup]="form">
   <p class="title-filter">Разрешение экрана:</p>
-  <ul class="filter-resolution">
-    <li *ngFor="let resolution of resolutionForRender$ | async">
-      <mat-checkbox [checked]="resolution.checked" (change)="toggleResolutionFilter(resolution.name)">
-        {{resolution.name}}
-      </mat-checkbox>
-    </li>
-    <li>
-      <mat-checkbox [checked]="true">
-        Выбрать все
-      </mat-checkbox>
-    </li>
-  </ul>
+  <mat-form-field color="pink">
+    <mat-select formControlName="resolution" multiple>
+      <mat-option *ngFor="let resolution of resolutions" [value]="resolution">
+        {{ resolution }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <p class="title-filter">Назначение:</p>
-  <ul>
-    <li *ngFor="let purpose of purposeForRender$ | async">
-      <mat-checkbox [checked]="purpose.checked" (change)="togglePurposeFilter(purpose.name)">
-        {{ purpose.name }}
-      </mat-checkbox>
-    </li>
-    <li>
-      <mat-checkbox [checked]="true">
-        Выбрать все
-      </mat-checkbox>
-    </li>
-  </ul>
+  <mat-form-field color="pink">
+    <mat-select formControlName="purpose" multiple>
+      <mat-option *ngFor="let purpose of purposes" [value]="purpose">
+        {{ purpose }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="price-block"> 
   <p class="title-filter">Цена:</p>
-  <ul>
-    <li class="block-price">
-      <p class="min-max-value"> {{ minPrice$ | async }} </p>
-      <mat-slider
-      thumbLabel step="1000" tickInterval="1000" [max]="maxPrice$ | async" [min]="minPrice$ | async" aria-label="unit(s)">
-      </mat-slider>
-      <p class="min-max-value"> {{ maxPrice$ | async}} </p>
-    </li>
-  </ul>
-  <p class="title-filter">Диагональ:</p>
-  <ul>
-    <li>
-      <mat-slider aria-label="unit(s)"></mat-slider>
-    </li>
-  </ul>
+
+    <!-- <li class="block-price"> -->
+
+      <div> 
+      <app-slider></app-slider>
+    </div>
+    <div class="input-price-wrabber">
+    <mat-form-field class="example-form-field" appearance="fill" class="min-max-value">
+      <mat-label>От:</mat-label>
+      <input matInput type="text" FormControlName="minValue" [value]="(price$ | async)?.[0]">
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field" appearance="fill" class="min-max-value">
+      <mat-label>До:</mat-label>
+      <input matInput type="text" FormControlName="maxValue" [value]="(price$ | async)?.[1]">
+    </mat-form-field>
+  </div>
+</div>
 </section>
+<!-- (price$ | async)[0] -->
+<!-- (price$ | async)[0] -->
+
+<!-- <p class="min-max-value"> {{ minPrice$ | async }} </p>
+<p class="min-max-value"> {{ maxPrice$ | async}} </p> -->
+
 <!-- [displayWith]="formatLabel" -->
 
 <!-- <mat-slider aria-label="unit(s)"></mat-slider> -->

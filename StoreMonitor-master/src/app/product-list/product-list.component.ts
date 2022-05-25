@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { thingOnCatalog } from '../interfaces/thingOnCatalog';
 
 import { ProductListContentService } from '../services/product-list-content.service';
@@ -12,10 +12,13 @@ import { ProductListContentService } from '../services/product-list-content.serv
 export class ProductListComponent implements OnInit {
   public dataThings$: Observable<thingOnCatalog[]>;
   public counterThings: number;
+  // public test$: Subscription;
 
   constructor(private dataThingsService: ProductListContentService) {
-    dataThingsService.getProducts();
+
+    // this.dataThings$ = dataThingsService.allDataThings$;
     this.dataThings$ = dataThingsService.allDataThings$.pipe(map(items => items.filter(item => item.visible)))
+
 
     this.counterThings = 0;
 
@@ -26,6 +29,10 @@ export class ProductListComponent implements OnInit {
 
   additionInBasket(evt: number) {
     this.dataThingsService.additionInBasket(evt);
+  }
+
+  transitionOnCard(evt:number) {
+    this.dataThingsService.transitionOnCard(evt)
   }
 
 }
