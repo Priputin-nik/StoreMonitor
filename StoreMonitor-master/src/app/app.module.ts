@@ -23,6 +23,9 @@ import { RecentlyViewedComponent } from './recentlyviewed/recentlyviewed.compone
 import { MatSelectModule } from '@angular/material/select';
 import { SliderComponent } from './slider/slider.component';
 import { MatInputModule } from '@angular/material/input';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [				
     AppComponent,
@@ -38,7 +41,7 @@ import { MatInputModule } from '@angular/material/input';
       SliderComponent
    ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     MatIconModule,
     BrowserAnimationsModule,
@@ -50,7 +53,14 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
